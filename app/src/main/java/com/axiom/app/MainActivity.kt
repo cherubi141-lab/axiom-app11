@@ -100,8 +100,9 @@ class MainActivity : AppCompatActivity() {
                 webView.visibility = View.VISIBLE
                 offlineView.visibility = View.GONE
             }
-        } 
-        override fun onPermissionRequest(request: PermissionRequest) {
+        }
+
+        webView.webChromeClient = object : WebChromeClient() { override fun onPermissionRequest(request: PermissionRequest) {
                 val needsAudio = request.resources.any { it == PermissionRequest.RESOURCE_AUDIO_CAPTURE }
                 if (!needsAudio) {
                     request.deny()
@@ -169,5 +170,3 @@ class MainActivity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
 }
-
-        webView.webChromeClient = object : WebChromeClient() {
