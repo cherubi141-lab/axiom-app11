@@ -1,4 +1,4 @@
-package com.axiom.app
+[8/27/2026 5:52 PM] H: package com.axiom.app
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -98,8 +98,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         webView.webChromeClient = object : WebChromeClient() {
-
-            // Bridges the browser's getUserMedia() mic-permission prompt
+[8/27/2026 5:52 PM] H: // Bridges the browser's getUserMedia() mic-permission prompt
             // (used by the voice-input button) to Android's runtime permission.
             override fun onPermissionRequest(request: PermissionRequest) {
                 val needsAudio = request.resources.any { it == PermissionRequest.RESOURCE_AUDIO_CAPTURE }
@@ -129,8 +128,13 @@ class MainActivity : AppCompatActivity() {
                 filePathCallback = callback
                 val intent = fileChooserParams?.createIntent()
                 return try {
-                    fileChooserLauncher.launch(intent)
-                    true
+                    if (intent != null) {
+                        fileChooserLauncher.launch(intent)
+                        true
+                    } else {
+                        filePathCallback = null
+                        false
+                    }
                 } catch (e: Exception) {
                     filePathCallback = null
                     false
