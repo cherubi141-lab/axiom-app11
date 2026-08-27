@@ -1,4 +1,4 @@
-[8/27/2026 6:14 PM] H: package com.axiom.app
+package com.axiom.app
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -99,8 +99,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 val hasPermission = ContextCompat.checkSelfPermission(
                     this@MainActivity, Manifest.permission.RECORD_AUDIO
-                ) == PackageManager.PERMISSION_GRANTED
-[8/27/2026 6:14 PM] H: if (hasPermission) {
+                ) == PackageManager.PERMISSION_GRANTED  
+                if (hasPermission) {
                     request.grant(request.resources)
                 } else {
                     pendingPermissionRequest = request
