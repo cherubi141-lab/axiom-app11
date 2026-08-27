@@ -87,8 +87,7 @@ class MainActivity : AppCompatActivity() {
         webView.overScrollMode = View.OVER_SCROLL_NEVER
         webView.isScrollbarFadingEnabled = true
 
-        if (WebViewFeature.isFeatureSupported(WebViewFeature.OFFSCREEN_PRERASTER)) {
-            WebSettingsCompat.setOffscreenPreRaster(s, true)
+if (WebViewFeature.isFeatureSupported(WebViewFeature.OFF_SCREEN_PRERASTER)) {
         }
         if (WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
             WebSettingsCompat.setAlgorithmicDarkeningAllowed(s, false)
