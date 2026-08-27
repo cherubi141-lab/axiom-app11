@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="void_bg">#07040E</color>
+    <color name="panel">#120A20</color>
+    <color name="purple">#A238FF</color>
+    <color name="magenta">#FF2F9E</color>
+    <color name="text_light">#F2ECFF</color>
+    <color name="ic_launcher_background">#0E0620</color>
+</resources>

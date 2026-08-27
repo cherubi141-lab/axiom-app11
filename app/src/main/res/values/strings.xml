@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AXIOM</string>
+    <string name="no_internet_title">اتصال اینترنت برقرار نیست</string>
+    <string name="no_internet_msg">برای استفاده از دستیار AXIOM به اتصال اینترنت نیاز است.</string>
+    <string name="retry">تلاش دوباره</string>
+</resources>
