@@ -18,6 +18,8 @@ import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.webkit.WebSettingsCompat
+import androidx.webkit.WebViewFeature
 
 class MainActivity : AppCompatActivity() {
 
@@ -81,17 +83,25 @@ class MainActivity : AppCompatActivity() {
         s.builtInZoomControls = false
         s.textZoom = 100
 
+        webView.setLayerType(View.LAYER_TYPE_HARDWARE, null)
+        webView.overScrollMode = View.OVER_SCROLL_NEVER
+        webView.isScrollbarFadingEnabled = true
+
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.OFFSCREEN_PRERASTER)) {
+            WebSettingsCompat.setOffscreenPreRaster(s, true)
+        }
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
+            WebSettingsCompat.setAlgorithmicDarkeningAllowed(s, false)
+        }
+
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
                 webView.visibility = View.VISIBLE
                 offlineView.visibility = View.GONE
             }
-        }
-
-        webView.webChromeClient = object : WebChromeClient() {
-
-            override fun onPermissionRequest(request: PermissionRequest) {
+        } 
+        override fun onPermissionRequest(request: PermissionRequest) {
                 val needsAudio = request.resources.any { it == PermissionRequest.RESOURCE_AUDIO_CAPTURE }
                 if (!needsAudio) {
                     request.deny()
@@ -99,7 +109,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 val hasPermission = ContextCompat.checkSelfPermission(
                     this@MainActivity, Manifest.permission.RECORD_AUDIO
-                ) == PackageManager.PERMISSION_GRANTED  
+                ) == PackageManager.PERMISSION_GRANTED
+
                 if (hasPermission) {
                     request.grant(request.resources)
                 } else {
@@ -158,3 +169,5 @@ class MainActivity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
 }
+
+        webView.webChromeClient = object : WebChromeClient() {
